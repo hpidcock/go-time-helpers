@@ -30,3 +30,30 @@ func UnixNanosecond(t time.Time) int64 {
 func UnixSecond(t time.Time) int64 {
 	return t.Unix()
 }
+
+// FromUnix casts unix timestamp to time.Time
+func FromUnix(t int64, unit time.Duration) time.Time {
+	unitDuration := time.Duration(t) * unit
+	nanoDuration := unitDuration / time.Nanosecond
+	return time.Unix(0, int64(nanoDuration))
+}
+
+// FromUnixMillisecond casts millisecond unix timestamp to time.Time
+func FromUnixMillisecond(t int64) time.Time {
+	return FromUnix(t, time.Millisecond)
+}
+
+// FromUnixMicrosecond casts microsecond unix timestamp to time.Time
+func FromUnixMicrosecond(t int64) time.Time {
+	return FromUnix(t, time.Microsecond)
+}
+
+// FromUnixNanosecond casts nanosecond unix timestamp to time.Time
+func FromUnixNanosecond(t int64) time.Time {
+	return time.Unix(0, t)
+}
+
+// FromUnixSecond casts second unix timestamp to time.Time
+func FromUnixSecond(t int64) time.Time {
+	return time.Unix(t, 0)
+}
